@@ -1,5 +1,5 @@
 import React from 'react'
-import '../assets/css/NavbarBefLogin.css'
+import styles from '../assets/css/NavBLogin.module.css'
 import {Link} from "react-router-dom";
 import { useState, useEffect } from 'react';
 
@@ -19,8 +19,8 @@ function NavbarBefLogin() {
     }, []);
 
     return (
-        <div className="tes">
-            <Link className="content" to="/about-us">
+        <div className={styles.tes}>
+            <Link className={styles.content} to="/about-us">
                 <p>About Us</p>
             </Link>
         </div>
