@@ -5,7 +5,7 @@ import NavBLogin from '../components/NavBLogin'
 import { useState } from "react"
 import { useDispatch } from 'react-redux';
 import { setUser } from '../store/KeranjangSlice';
-import useGetUser from "../hooks/useGetUser";
+// import useGetUser from "../hooks/useGetUser";
 
 function Login() {
     const [state, setState] = useState({
@@ -14,12 +14,12 @@ function Login() {
     })
     const dispatch = useDispatch()
 
-    const { getUser, loading, error, user } = useGetUser();
+    // const { getUser, loading, error, user } = useGetUser();
     
-    if (error){
-        console.log("error ",error)
-        return null
-    }
+    // if (error){
+    //     console.log("error ",error)
+    //     return null
+    // }
 
     const onChange = (e) => {
         setState({
@@ -31,18 +31,7 @@ function Login() {
     
 
     const handleSubmit = (e) => {
-
-        const temp = {
-            nama: state.nama,
-            password: state.password
-        }
-        console.log(temp);
-        getUser({variables :{
-            username: temp.nama,
-            password: temp.password,
-        }})
-        setTimeout(1000)
-        dispatch(setUser(user));
+        dispatch(setUser(state));
     }
 
     return (
