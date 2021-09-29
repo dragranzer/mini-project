@@ -10,3 +10,17 @@ export const InsertUser = gql`
         username
         }
     }`;
+
+export const InsertBarang = gql `
+mutation MyMutation($category: String!, $description: String!, $name: String!, $imgUrl: String!, $stock: Int!, $harga: Int!) {
+    insert_fishes_one(object: {category: $category, description: $description, name: $name, imgUrl: $imgUrl, stock: $stock, harga: $harga}) {
+      category
+      description
+      id
+      imgUrl
+      name
+      stock
+      harga
+    }
+  }
+`

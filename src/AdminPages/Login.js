@@ -22,7 +22,7 @@ function login() {
                         </div>
                         <input type="text" placeholder="      Password"/>
                     </div>
-                    <Link className={styles.signin} to="/home">
+                    <Link className={styles.signin} to="/home-admin">
                         <div className={styles.signin}>
                             <p>Login</p>
                         </div>

@@ -10,6 +10,9 @@ function Profile() {
     console.log(name);
     const { loading, error, user } = useGetUser(name);
     // console.log(user[0].fullname)
+    if (loading){
+        return <h3>Loading...</h3>;
+    }
     console.log(user)
     if (error){
         console.log("error ",error)

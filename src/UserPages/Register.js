@@ -33,6 +33,14 @@ function Register() {
 
     const handleSubmit = (e) => {
         tambahUser(state);
+        setState({      
+            age: "",
+            fullname: "",
+            gender: "",
+            password: "",
+            username: "",
+            passConfirm:"",
+        });
     }
 
     const onChange = (e) => {
