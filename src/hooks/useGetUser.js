@@ -2,13 +2,13 @@ import { useLazyQuery, useQuery } from "@apollo/client";
 import { GetUser } from "../graphql/query";
 
 export default function useGetData(props) {
-    console.log(props)
+    // console.log(props)
     const { data, loading, error } = useQuery(GetUser, {variables:
         {
             username: props
         }
     });
-    console.log(data)
+    // console.log(data)
     return {
       user: data ? data.user : [],
       loading,

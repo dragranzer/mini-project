@@ -24,3 +24,34 @@ mutation MyMutation($category: String!, $description: String!, $name: String!, $
     }
   }
 `
+
+export const UpdateFullname = gql `
+mutation MyMutation2($username: String!, $fullname: String!) {
+    update_user(where: {username: {_eq: $username}}, _set: {fullname: $fullname}) {
+      returning {
+        age
+        fullname
+        gender
+        id
+        password
+        username
+      }
+    }
+  }
+`
+
+export const UpdateUsername = gql `
+mutation MyMutation2($username: String!, $newUsername: String!) {
+    update_user(where: {username: {_eq: $username}}, _set: {username: $newUsername}) {
+      returning {
+        age
+        fullname
+        gender
+        id
+        password
+        username
+      }
+    }
+  }
+`
+

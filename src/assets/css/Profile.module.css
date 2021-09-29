@@ -22,4 +22,19 @@
     line-height: 62px;
     text-align: center;
     color: white;
+    margin-bottom: 10px;
+}
+
+.caption{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    color: #FFFFFF;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    display: flex;
 }
