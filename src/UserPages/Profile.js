@@ -2,6 +2,7 @@ import React from 'react';
 import NavALogin from '../components/NavALogin';
 import styles from '../assets/css/Profile.module.css';
 import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../store/KeranjangSlice';
 import useGetUser from "../hooks/useGetUser";
 import { useState } from "react";
 import * as FaIcons from "react-icons/fa";
@@ -10,10 +11,14 @@ import useUpdateUsername from "../hooks/useUpdateUsername";
 
 function Profile() {
     const name = useSelector((state) => state.keranjang.user);
-    // console.log(name);
-    const { loading, error, user } = useGetUser(name);
+    const dispatch = useDispatch()
+    console.log(name);
+    
     const { updateFullname, loadingUpdateFullname } = useUpdateFullname();
-    const { updateUsername, loadingUpdateUsername } = useUpdateUsername();
+    const { updateUsername, loadingUpdateUsername } = useUpdateUsername(name);
+    const { loading, error, user } = useGetUser(name);
+    console.log(user)
+
 
     const [editFullname, setEditFullname] = useState(false)
     const [editUsername, setEditUsername] = useState(false)
@@ -27,7 +32,7 @@ function Profile() {
     const [newAge, setNewAge] = useState("")
     const [newPassword, setNewPassword] = useState("")
 
-    if (loading || loadingUpdateFullname){
+    if (loading || loadingUpdateFullname || loadingUpdateUsername){
         return <h3>Loading...</h3>;
     }
     if (error){
@@ -114,20 +119,29 @@ function Profile() {
             fullname: newFullname,
             username: newData[0].username
         }})
+       
         // console.log(newData[0].username)
         // console.log(newFullname)
     }
 
     const handleUpdateUsername = (user) => {
+        
         const newData = {
             ...user
         }
+        dispatch(setUser(newUsername));
+        // console.log(newData[0].username)
         updateUsername({variables:{
             newUsername: newUsername,
             username: newData[0].username
         }})
+        
         // console.log(newData[0].username)
         // console.log(newFullname)
+    }
+
+    if (loading || loadingUpdateFullname || loadingUpdateUsername){
+        return <h3>Loading...</h3>;
     }
 
     return (

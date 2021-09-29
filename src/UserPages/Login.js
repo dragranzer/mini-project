@@ -22,7 +22,7 @@ function Login() {
     
 
     const handleSubmit = (e) => {
-        dispatch(setUser(state));
+        dispatch(setUser(state.nama));
     }
 
     return (

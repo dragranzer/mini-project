@@ -13,8 +13,8 @@ export const KeranjangSlice = createSlice ({
     },
     reducers:{
         setUser: (state, action) => {
-            // console.log(action.payload)
-            state.user = action.payload.nama
+            console.log(action.payload)
+            state.user = action.payload
             // console.log(state.user)
         }
     }

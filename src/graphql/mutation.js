@@ -55,3 +55,18 @@ mutation MyMutation2($username: String!, $newUsername: String!) {
   }
 `
 
+
+export const UpdateGender = gql `
+mutation MyMutation2($username: String!, $gender: String!) {
+    update_user(where: {username: {_eq: $username}}, _set: {gender: $gender}) {
+      returning {
+        age
+        fullname
+        gender
+        id
+        password
+        username
+      }
+    }
+  }
+`
