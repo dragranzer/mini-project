@@ -11,11 +11,13 @@ import useUpdateUsername from "../hooks/useUpdateUsername";
 
 function Profile() {
     const name = useSelector((state) => state.keranjang.user);
+    const id = useSelector((state) => state.keranjang.id);
     const dispatch = useDispatch()
+    console.log(id);
     console.log(name);
     const { loading, error, user } = useGetUser(name);
     const { updateFullname, loadingUpdateFullname } = useUpdateFullname();
-    const { updateUsername, loadingUpdateUsername } = useUpdateUsername(name);
+    const { updateUsername, loadingUpdateUsername } = useUpdateUsername(id);
     
     console.log(user)
 
@@ -33,9 +35,9 @@ function Profile() {
     const [newPassword, setNewPassword] = useState("")
 
     
-    console.log("afloading", loading)
-    console.log("afloadingUpdateUsername", loadingUpdateUsername)
-    console.log("afloadingUpdateFullname", loadingUpdateFullname)
+    // console.log("afloading", loading)
+    // console.log("afloadingUpdateUsername", loadingUpdateUsername)
+    // console.log("afloadingUpdateFullname", loadingUpdateFullname)
     if (error){
         console.log("error ",error)
         return null

@@ -29,15 +29,15 @@ query MyQuery2($username: String!) {
 `
 
 export const GetUserbyID = gql`
-query MyQuery($id: Int!) {
-    user(where: {id: {_eq: $id}}) {
-      age
-      fullname
-      gender
-      password
-      username
-      id
-    }
+query MyQuery3($id: Int!) {
+  user_by_pk(id: $id) {
+    age
+    fullname
+    gender
+    password
+    username
+    id
   }
+}
   
 `

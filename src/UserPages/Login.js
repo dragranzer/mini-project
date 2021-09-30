@@ -2,9 +2,9 @@ import React from 'react'
 import {Link, useHistory} from "react-router-dom";
 import styles from '../assets/css/Login.module.css'
 import NavBLogin from '../components/NavBLogin'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch } from 'react-redux';
-import { setUser } from '../store/KeranjangSlice';
+import { setUser, setID } from '../store/KeranjangSlice';
 import useLazyGetUser from "../hooks/useLazyGetUser";
 import { GetUser2 } from "../graphql/query";
 import { useLazyQuery, useQuery } from "@apollo/client";
@@ -15,21 +15,32 @@ function Login() {
     const [state, setState] = useState({
         nama: "",
         password: "",
-        id:""
     })
     
     const { user, loading, error, getData_qry } = useLazyGetUser();
-    // const [getData_qry, { data: user, loading, error }] = useLazyQuery(GetUser2);
+    useEffect(()=>{
+        console.log("masuk useEffect ")
+        if (user.length !== 0){
+            console.log("masuk if ")
+            history.push("/home");
+            dispatch(setID(user[0].id))
+            dispatch(setUser(state));
+        }else{
+            console.log("masuk else ")
+        }
+    }, [user])
+    
     const dispatch = useDispatch()
     // console.log(getData_qry)
     if(loading){
         return <h1>Loading...</h1>
     }
+    
 
     if(error){
         return null;
     }
-    console.log(user)
+    
     
     const onChange = (e) => {
         setState({
@@ -46,14 +57,12 @@ function Login() {
         }})
         console.log(loading)
         dispatch(setUser(state.nama));
-    }
-    
-
-    // if (user){
-    //     history.push("/home");
-    // }else{
+        console.log(user)
         
-    // }
+    }
+    console.log("state.nama = ", user)
+    
+    
 
     return (
         <div>

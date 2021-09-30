@@ -7,7 +7,7 @@ export default function useUpdateUsername(props) {
     refetchQueries: [
       {
         query: GetUser,
-        variables: { username: props }
+        variables: { id: props }
       }
     ],
     awaitRefetchQueries: true,
