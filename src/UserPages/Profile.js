@@ -13,10 +13,10 @@ function Profile() {
     const name = useSelector((state) => state.keranjang.user);
     const dispatch = useDispatch()
     console.log(name);
-    
+    const { loading, error, user } = useGetUser(name);
     const { updateFullname, loadingUpdateFullname } = useUpdateFullname();
     const { updateUsername, loadingUpdateUsername } = useUpdateUsername(name);
-    const { loading, error, user } = useGetUser(name);
+    
     console.log(user)
 
 
@@ -32,9 +32,10 @@ function Profile() {
     const [newAge, setNewAge] = useState("")
     const [newPassword, setNewPassword] = useState("")
 
-    if (loading || loadingUpdateFullname || loadingUpdateUsername){
-        return <h3>Loading...</h3>;
-    }
+    
+    console.log("afloading", loading)
+    console.log("afloadingUpdateUsername", loadingUpdateUsername)
+    console.log("afloadingUpdateFullname", loadingUpdateFullname)
     if (error){
         console.log("error ",error)
         return null

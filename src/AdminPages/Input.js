@@ -4,6 +4,7 @@ import styles from '../assets/css/InputAdmin.module.css';
 import {Link} from "react-router-dom";
 import { useState } from "react";
 import useInsertBarang from "../hooks/useInsertBarang";
+import { app } from "../firebase/base";
 
 function Input() {
     const { insertBarang, loadingInsert } = useInsertBarang();
@@ -52,6 +53,22 @@ function Input() {
         console.log(state)
     }
 
+    const onChangeImg = (e) => {
+        const file = e.target.files[0];
+        const storageRef = app.storage().ref();
+        const fileRef = storageRef.child(file.name);
+        console.log("file = ", file);
+        console.log("storageRef = ", storageRef);
+        console.log("fileRef = ", fileRef);
+        fileRef.put(file).then((e) => {
+          console.log("Uploaded a file");
+          console.log("didalam e = ", e);
+          e.ref.getDownloadURL().then(function (downloadURL) {
+            console.log("File available at", downloadURL);
+          });
+        });
+      };
+
     return (
         <div>
             <NavbarAdmin />
@@ -62,7 +79,7 @@ function Input() {
                     </div>
                     <div className="row">
                         <div className="col-5">
-                            <input type="file" value={state.imgUrl} name="imgUrl" onChange={onChange}/>
+                            <input type="file" value={state.imgUrl} name="imgUrl" onChange={onChangeImg}/>
                         </div>
                         <div className="col-7">
                             <div className={styles.caption}>

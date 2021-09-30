@@ -2,15 +2,15 @@ import { useMutation } from "@apollo/client";
 import { UpdateUsername } from "../graphql/mutation";
 import { GetUser } from "../graphql/query"
 export default function useUpdateUsername(props) {
-  console.log(props)
+  console.log("masuk useUpdateuname",props)
   const [updateUsername, { loading: loadingUpdateUsername }] = useMutation(UpdateUsername,{
-    awaitRefetchQueries: true,
     refetchQueries: [
       {
         query: GetUser,
         variables: { username: props }
       }
     ],
+    awaitRefetchQueries: true,
     notifyOnNetworkStatusChange: true
   });
   return {
