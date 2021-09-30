@@ -6,8 +6,6 @@ import { useState, useEffect } from "react"
 import { useDispatch } from 'react-redux';
 import { setUser, setID } from '../store/KeranjangSlice';
 import useLazyGetUser from "../hooks/useLazyGetUser";
-import { GetUser2 } from "../graphql/query";
-import { useLazyQuery, useQuery } from "@apollo/client";
 
 
 function Login() {

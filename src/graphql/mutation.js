@@ -26,8 +26,8 @@ mutation MyMutation($category: String!, $description: String!, $name: String!, $
 `
 
 export const UpdateFullname = gql `
-mutation MyMutation2($username: String!, $fullname: String!) {
-    update_user(where: {username: {_eq: $username}}, _set: {fullname: $fullname}) {
+mutation MyMutation2($id: Int!, $fullname: String!) {
+    update_user(where: {id: {_eq: $id}}, _set: {fullname: $fullname}) {
       returning {
         age
         fullname
@@ -41,8 +41,8 @@ mutation MyMutation2($username: String!, $fullname: String!) {
 `
 
 export const UpdateUsername = gql `
-mutation MyMutation2($username: String!, $newUsername: String!) {
-    update_user(where: {username: {_eq: $username}}, _set: {username: $newUsername}) {
+mutation MyMutation2($id: Int!, $newUsername: String!) {
+    update_user(where: {id: {_eq: $id}}, _set: {username: $newUsername}) {
       returning {
         age
         fullname
@@ -57,8 +57,38 @@ mutation MyMutation2($username: String!, $newUsername: String!) {
 
 
 export const UpdateGender = gql `
-mutation MyMutation2($username: String!, $gender: String!) {
-    update_user(where: {username: {_eq: $username}}, _set: {gender: $gender}) {
+mutation MyMutation2($id: Int!, $gender: String!) {
+    update_user(where: {id: {_eq: $id}}, _set: {gender: $gender}) {
+      returning {
+        age
+        fullname
+        gender
+        id
+        password
+        username
+      }
+    }
+  }
+`
+
+export const UpdateAge = gql `
+mutation MyMutation2($id: Int!, $age: Int!) {
+    update_user(where: {id: {_eq: $id}}, _set: {age: $age}) {
+      returning {
+        age
+        fullname
+        gender
+        id
+        password
+        username
+      }
+    }
+  }
+`
+
+export const UpdatePassword = gql `
+mutation MyMutation2($id: Int!, $password: String!) {
+    update_user(where: {id: {_eq: $id}}, _set: {password: $password}) {
       returning {
         age
         fullname

@@ -5,7 +5,7 @@ export default function useGetData(props) {
     // console.log(props)
     const { data, loading, error } = useQuery(GetUser, {variables:
         {
-            username: props
+            id: props
         }
     });
     // console.log(data)

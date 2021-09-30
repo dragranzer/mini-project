@@ -8,6 +8,9 @@ import { useState } from "react";
 import * as FaIcons from "react-icons/fa";
 import useUpdateFullname from "../hooks/useUpdateFullname";
 import useUpdateUsername from "../hooks/useUpdateUsername";
+import useUpdateGender from "../hooks/useUpdateGender";
+import useUpdateAge from "../hooks/useUpdateAge";
+import useUpdatePassword from "../hooks/useUpdatePassword";
 
 function Profile() {
     const name = useSelector((state) => state.keranjang.user);
@@ -15,9 +18,12 @@ function Profile() {
     const dispatch = useDispatch()
     console.log(id);
     console.log(name);
-    const { loading, error, user } = useGetUser(name);
-    const { updateFullname, loadingUpdateFullname } = useUpdateFullname();
+    const { loading, error, user } = useGetUser(id);
+    const { updateFullname, loadingUpdateFullname } = useUpdateFullname(id);
     const { updateUsername, loadingUpdateUsername } = useUpdateUsername(id);
+    const { updateGender, loadingUpdateGender} = useUpdateGender(id);
+    const { updateAge, loadingUpdateAge} = useUpdateAge(id);
+    const { updatePassword, loadingUpdatePassword} = useUpdatePassword(id);
     
     console.log(user)
 
@@ -81,7 +87,7 @@ function Profile() {
         setEditFullname(true)
     }
     const TutupInputFullname = () => {
-        handleUpdateFullname(user);
+        handleUpdateFullname();
         setEditFullname(false);
     }
 
@@ -89,7 +95,7 @@ function Profile() {
         setEditUsername(true)
     }
     const TutupInputUsername = () => {
-        handleUpdateUsername(user);
+        handleUpdateUsername();
         setEditUsername(false)
     }
 
@@ -97,6 +103,7 @@ function Profile() {
         setEditGender(true)
     }
     const TutupInputGender = () => {
+        handleUpdateGender()
         setEditGender(false)
     }
 
@@ -104,6 +111,7 @@ function Profile() {
         setEditAge(true)
     }
     const TutupInputAge = () => {
+        handleUpdateAge()
         setEditAge(false)
     }
 
@@ -111,39 +119,65 @@ function Profile() {
         setEditPassword(true)
     }
     const TutupInputPassword = () => {
+        handleUpdatePassword()
         setEditPassword(false)
     }
 
-    const handleUpdateFullname = (user) => {
-        const newData = {
-            ...user
-        }
+    const handleUpdateFullname = () => {
         updateFullname({variables:{
             fullname: newFullname,
-            username: newData[0].username
+            id: id
         }})
        
         // console.log(newData[0].username)
         // console.log(newFullname)
     }
 
-    const handleUpdateUsername = (user) => {
-        
-        const newData = {
-            ...user
-        }
+    const handleUpdateUsername = () => {
         dispatch(setUser(newUsername));
         // console.log(newData[0].username)
         updateUsername({variables:{
             newUsername: newUsername,
-            username: newData[0].username
+            id: id
         }})
-        
-        // console.log(newData[0].username)
-        // console.log(newFullname)
     }
 
-    if (loading || loadingUpdateFullname || loadingUpdateUsername){
+    const handleUpdateGender = () => {
+        // console.log(newData[0].username)
+        console.log(newGender)
+        updateGender({variables:{
+            gender: newGender,
+            id: id
+        }})
+    }
+
+    if (loading || loadingUpdateFullname 
+        || loadingUpdateUsername || loadingUpdateGender 
+        || loadingUpdateAge || loadingUpdatePassword){
+        return <h3>Loading...</h3>;
+    }
+
+    const handleUpdateAge = () => {
+        // console.log(newData[0].username)
+        console.log(newAge)
+        updateAge({variables:{
+            age: newAge,
+            id: id
+        }})
+    }
+
+    const handleUpdatePassword = () => {
+        // console.log(newData[0].username)
+        console.log(newPassword)
+        updatePassword({variables:{
+            password: newPassword,
+            id: id
+        }})
+    }
+
+    if (loading || loadingUpdateFullname 
+        || loadingUpdateUsername || loadingUpdateGender 
+        || loadingUpdateAge || loadingUpdatePassword){
         return <h3>Loading...</h3>;
     }
 

@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GetUser = gql`
-query MyQuery($username: String!) {
-    user(where: {username: {_eq: $username}}) {
+query MyQuery($id: Int!) {
+    user(where: {id: {_eq: $id}}) {
       age
       fullname
       gender
@@ -25,19 +25,5 @@ query MyQuery2($username: String!) {
       id
     }
   }
-  
-`
-
-export const GetUserbyID = gql`
-query MyQuery3($id: Int!) {
-  user_by_pk(id: $id) {
-    age
-    fullname
-    gender
-    password
-    username
-    id
-  }
-}
   
 `
