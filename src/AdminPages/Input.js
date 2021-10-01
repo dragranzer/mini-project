@@ -33,6 +33,9 @@ function Input() {
             harga: newData.harga
         }})
     }
+    if(loadingInsert){
+        return <h1>Inserting Image..</h1>
+    }
 
     const handleSubmit = (e) => {
         tambahBarang(state);
@@ -51,24 +54,31 @@ function Input() {
           ...state,
           [e.target.name]: e.target.value,
         })
-        console.log(state)
+        // console.log(e.target.name)
+        // console.log(state)
     }
 
     const onChangeImg = (e) => {
         const file = e.target.files[0];
-        console.log(file)
-        const storageRef = app.storage().ref(); //bikin error
+        // console.log(app)
+        const storageRef = app.storage().ref();
         const fileRef = storageRef.child(file.name);
-        console.log("file = ", file);
-        console.log("storageRef = ", storageRef);
-        console.log("fileRef = ", fileRef);
+        // console.log("file = ", file);
+        // console.log("storageRef = ", storageRef);
+        // console.log("fileRef = ", fileRef);
         fileRef.put(file).then((e) => {
-          console.log("Uploaded a file");
-          console.log("didalam e = ", e);
+        //   console.log("Uploaded a file");
+        //   console.log("didalam e = ", e);
           e.ref.getDownloadURL().then(function (downloadURL) {
-            console.log("File available at", downloadURL);
+            // console.log("File available at", downloadURL);
+            setState({
+                ...state,
+                imgUrl: downloadURL,
+            })
           });
+          
         });
+        
       };
 
     return (
@@ -81,7 +91,7 @@ function Input() {
                     </div>
                     <div className="row">
                         <div className="col-5">
-                            <input type="file" value={state.imgUrl} name="imgUrl" onChange={onChangeImg}/>
+                            <input type="file" name="imgUrl" onChange={onChangeImg}/>
                         </div>
                         <div className="col-7">
                             <div className={styles.caption}>
