@@ -27,3 +27,17 @@ query MyQuery2($username: String!) {
   }
   
 `
+
+export const GetAllFish = gql `
+query MyQuery {
+  fishes {
+    category
+    description
+    harga
+    id
+    imgUrl
+    name
+    stock
+  }
+}
+`
