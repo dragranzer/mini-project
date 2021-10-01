@@ -14,16 +14,25 @@ function Login() {
         nama: "",
         password: "",
     })
+    const [errMsg, setErrMsg] = useState(false)
     
     const { user, loading, error, getData_qry } = useLazyGetUser();
     useEffect(()=>{
         console.log("masuk useEffect ")
-        if (user.length !== 0){
-            console.log("masuk if ")
-            history.push("/home");
-            dispatch(setID(user[0].id))
-            dispatch(setUser(state));
+        if (user.length !== 0 ){
+            if(user[0].password === state.password){
+                setErrMsg(false);
+                console.log("masuk if ")
+                console.log(user[0].password)
+                console.log(state.password)
+                history.push("/home");
+                dispatch(setID(user[0].id))
+                dispatch(setUser(state));
+            }else{
+                setErrMsg(true);
+            }
         }else{
+            
             console.log("masuk else ")
         }
     }, [user])
@@ -56,7 +65,7 @@ function Login() {
         console.log(loading)
         dispatch(setUser(state.nama));
         console.log(user)
-        
+        setErrMsg(true);
     }
     console.log("state.nama = ", user)
     
@@ -79,16 +88,22 @@ function Login() {
                         <div className={styles.caption}>
                             Password:
                         </div>
-                        <input type="text" placeholder="      Password" value={state.password} name="password" onChange={onChange}/>
+                        <input type="password" placeholder="      Password" value={state.password} name="password" onChange={onChange}/>
                     </div>
                     <div className={styles.signin} onClick={handleSubmit}>
-                        <div className={styles.signin}>
+                        
                             <p>Login</p>
-                        </div>
+                        
+                    </div>
+                    <div className={styles.errMsg}>
+                        {errMsg ? "Username dan Password tidak cocok":""}
+                    </div>
+                    <div className={styles.signUp}>
+                        <p>Belum punya akun? <Link to ="/register">Daftar</Link></p>
                     </div>
                     <Link to="/log-admin">
                         <div className={styles.admin}>
-                            Login sebagai admin?
+                            <p>Login sebagai admin?</p>
                         </div>
                     </Link>
                 </div>

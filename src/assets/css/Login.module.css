@@ -3,6 +3,7 @@
     width: 100%;
     background-image: url('../img/96622.jpg');
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding-top: 70px;
 }
 
 .loginBox{
@@ -42,7 +43,12 @@ input{
 
 .admin{
     text-align: center;
-    margin-top: 230px;
+    margin-top: 130px;
+    text-decoration: none;
+}
+
+.admin p{
+    text-decoration: none;
 }
 
 .signin{
@@ -53,6 +59,11 @@ input{
     text-align: center;
     margin: auto;
     text-decoration: none;
+    margin-top: 30px;
+}
+
+.signin:hover{
+    background: #6277ad;
 }
 
 .signin p{
@@ -60,3 +71,12 @@ input{
     color: white;
 }
 
+.errMsg{
+    text-align: center;
+    color: red;
+}
+
+.signUp p{
+    text-align: center;
+    text-decoration: none;
+}

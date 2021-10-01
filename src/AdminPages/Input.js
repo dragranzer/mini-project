@@ -4,7 +4,8 @@ import styles from '../assets/css/InputAdmin.module.css';
 import {Link} from "react-router-dom";
 import { useState } from "react";
 import useInsertBarang from "../hooks/useInsertBarang";
-import { app } from "../firebase/base";
+import { app } from "../base";
+import "firebase/storage";
 
 function Input() {
     const { insertBarang, loadingInsert } = useInsertBarang();
@@ -55,7 +56,8 @@ function Input() {
 
     const onChangeImg = (e) => {
         const file = e.target.files[0];
-        const storageRef = app.storage().ref();
+        console.log(file)
+        const storageRef = app.storage().ref(); //bikin error
         const fileRef = storageRef.child(file.name);
         console.log("file = ", file);
         console.log("storageRef = ", storageRef);

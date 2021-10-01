@@ -3,6 +3,7 @@
     width: 100%;
     background-image: url('../img/96622.jpg');
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding-top: 70px;
 }
 
 .registerBox{
@@ -13,8 +14,11 @@
     margin: auto;
 }
 
-.row{
-    margin-left: -50px;
+.errMsg{
+    /* background-color: aqua; */
+    width: 70%;
+    margin-left: 70px;
+    color: red;
 }
 
 input{
@@ -50,9 +54,28 @@ input{
     text-align: center;
     margin: auto;
     text-decoration: none;
+    margin-top: 20px;
 }
 
 .signin p{
     padding-top: 5px;
     color: white;
+}
+
+.box{
+    /* background-color: aqua; */
+    width: 90%;
+}
+
+.link{
+    background-color: aqua;
+}
+
+.radio{
+    margin-left: -100px;
+    background-color: white;
+}
+
+.radioLabel{
+    margin-left: 0;
 }
