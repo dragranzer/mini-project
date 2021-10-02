@@ -6,7 +6,7 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { SidebarData } from "./SidebarData";
 
-function NavALogin() {
+function NavbarAdmin() {
 
     const [sidebar, setSidebar] = useState(true);
     const showSidebar = () => {
@@ -34,16 +34,13 @@ function NavALogin() {
                         
                         <ul className="navbar-nav">
                             <li className="nav-item px-2 ">
-                            <Link className="nav-link my-active" aria-current="page" to="/home">Home</Link>
+                            <Link className="nav-link my-active" aria-current="page" to="/home-admin">Home</Link>
                             </li>
                             <li className="nav-item px-2 ">
                             <Link className="nav-link" aria-current="page" to="/about-us">About Us</Link>
                             </li>
                             <li className="nav-item px-2">
                             <Link className="nav-link" aria-current="page" to="/input">Input Data</Link>
-                            </li>
-                            <li className="nav-item px-2">
-                            <Link className="nav-link" aria-current="page" to="/profile">Profile</Link>
                             </li>
                         </ul>
                     </div>
@@ -71,4 +68,4 @@ function NavALogin() {
     )
 }
 
-export default NavALogin
+export default NavbarAdmin

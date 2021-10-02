@@ -100,3 +100,19 @@ mutation MyMutation2($id: Int!, $password: String!) {
     }
   }
 `
+
+export const DeleteFish = gql `
+mutation MyMutation($id: Int!) {
+  delete_fishes(where: {id: {_eq: $id}}) {
+    returning {
+      category
+      description
+      harga
+      id
+      imgUrl
+      name
+      stock
+    }
+  }
+}
+`
