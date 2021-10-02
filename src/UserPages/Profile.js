@@ -2,6 +2,7 @@ import React from 'react';
 import NavALogin from '../components/NavALogin';
 import styles from '../assets/css/Profile.module.css';
 import { useSelector, useDispatch } from 'react-redux';
+import {Link} from "react-router-dom";
 import { setUser } from '../store/KeranjangSlice';
 import useGetUser from "../hooks/useGetUser";
 import { useState } from "react";
@@ -268,6 +269,9 @@ function Profile() {
                                 }
                                 
                             </div>
+                            <Link className={styles.logOut} to="/">
+                                Log Out
+                            </Link>
                         </div>
                     </div>
                 </div>

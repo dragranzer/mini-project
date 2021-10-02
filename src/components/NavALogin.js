@@ -40,7 +40,7 @@ function NavALogin() {
                             <Link className="nav-link" aria-current="page" to="/about-us">About Us</Link>
                             </li>
                             <li className="nav-item px-2">
-                            <Link className="nav-link" aria-current="page" to="#">Keranjang</Link>
+                            <Link className="nav-link" aria-current="page" to="/keranjang">Keranjang</Link>
                             </li>
                             <li className="nav-item px-2">
                             <Link className="nav-link" aria-current="page" to="/profile">Profile</Link>

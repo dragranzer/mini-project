@@ -3,7 +3,7 @@ import NavALogin from '../components/NavALogin';
 import styles from '../assets/css/Home.module.css';
 import { useState } from "react";
 import useGetAllFish from "../hooks/useGetAllFish";
-import ListFish from "../components/ListFish"
+import ListFish from "../components/ListFish";
 
 function Home() {
     const { loading, error, fishes } = useGetAllFish();

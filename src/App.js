@@ -10,6 +10,8 @@ import LoginAdmin from './AdminPages/Login';
 import Profile from './UserPages/Profile';
 import HomeAdmin from './AdminPages/Home';
 import InputAdmin from './AdminPages/Input';
+import DetailFish from './UserPages/DetailFish';
+import Keranjang from './UserPages/Keranjang';
 import {store, persistor} from "./store/store";
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -25,6 +27,8 @@ function App() {
             <Route exact path="/register" render={() => <Register />}/>
             <Route exact path="/about-us" render={() => <AboutUs />}/>
             <Route exact path="/profile" render={() => <Profile />}/>
+            <Route exact path="/detail-fish" render={() => <DetailFish />}/>
+            <Route exact path="/keranjang" render={() => <Keranjang />}/>
             <Route exact path="/log-admin" render={() => <LoginAdmin />}/>
             <Route exact path="/home-admin" render={() => <HomeAdmin />}/>
             <Route exact path="/input" render={() => <InputAdmin />}/>

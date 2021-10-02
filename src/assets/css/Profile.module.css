@@ -38,3 +38,22 @@
     margin-top: 20px;
     display: flex;
 }
+
+.logOut{
+    width: 96px;
+    height: 31px;
+    background: #29264A;
+    border-radius: 20px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+    padding-top: 5px;
+    display: inline-block;
+    margin-left: 45%;
+    
+}
+
+.logOut:hover{
+    background: #5e55a8;
+}
