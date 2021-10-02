@@ -12,6 +12,8 @@ import HomeAdmin from './AdminPages/Home';
 import InputAdmin from './AdminPages/Input';
 import DetailFish from './UserPages/DetailFish';
 import Keranjang from './UserPages/Keranjang';
+import EditFish from './AdminPages/EditFish';
+
 import {store, persistor} from "./store/store";
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -32,6 +34,7 @@ function App() {
             <Route exact path="/log-admin" render={() => <LoginAdmin />}/>
             <Route exact path="/home-admin" render={() => <HomeAdmin />}/>
             <Route exact path="/input" render={() => <InputAdmin />}/>
+            <Route exact path="/edit-fish" render={() => <EditFish />}/>
             <Route exact path="*" render={() => <NotFound />}/>
           </Switch>
         </Router>

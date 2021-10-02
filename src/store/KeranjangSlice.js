@@ -5,6 +5,7 @@ const idFish = []
 const user = ""
 const id = 0
 const fish = {}
+const fishEdit = {}
 
 export const KeranjangSlice = createSlice ({
     name: "keranjang",
@@ -14,6 +15,7 @@ export const KeranjangSlice = createSlice ({
         user: user,
         id: id,
         fish: fish,
+        fishEdit: fishEdit,
     },
     reducers:{
         setUser: (state, action) => {
@@ -70,9 +72,13 @@ export const KeranjangSlice = createSlice ({
         },
         editJumlahPesanan: (state, action) => {
             console.log(action.payload);
+        },
+        setFishEdit: (state, action) => {
+            console.log(action.payload);
+            state.fishEdit = action.payload;
         }
     }
 })
 
-export const {setUser, setID, setFish, tambahKeranjang, hapusKeranjang} = KeranjangSlice.actions;
+export const {setUser, setID, setFish, tambahKeranjang, hapusKeranjang, setFishEdit} = KeranjangSlice.actions;
 export default KeranjangSlice.reducer;

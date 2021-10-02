@@ -1,6 +1,6 @@
 .body{
     width: 100%;
-    height: 1024px;
+    height: 700px;
     background-image: url('../img/92-925774_sea-coral-wallpaper-hd.jpg');
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     padding-top: 100px;
@@ -8,7 +8,7 @@
 
 .boxProfile{
     width: 745px;
-    height: 749px;
+    height: 500px;
     background: linear-gradient(180deg, #29264A 0%, rgba(41, 38, 74, 0.5) 100%);
     border-radius: 20px;
     padding-top: 20px;
@@ -56,4 +56,46 @@
 
 .logOut:hover{
     background: #5e55a8;
+}
+
+.input{
+    margin-left: 10px;
+    margin-right: 30px;
+    width: 70%;
+}
+
+.buy{
+    width: 96px;
+    height: 31px;
+    background: #29264A;
+    border-radius: 20px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+    padding-top: 5px;
+    margin-left: 19px;
+    margin: auto;
+}
+
+.buy:hover{
+    background: #5e55a8;
+}
+
+.ItemImg{
+    width: 429px;
+    height: 456px;
+    border-radius: 500px;
+    margin-left: 20%;
+    margin-top: 10%;
+}
+
+.upload{
+    width: 429px;
+    height: 456px;
+    border-radius: 500px;
+    margin-left: 20%;
+    margin-top: 10%;
+    padding-top: 30%;
+    background: #ffffff;
 }

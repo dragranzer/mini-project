@@ -164,17 +164,17 @@ function Input() {
         fileRef.put(file).then((e) => {
         //   console.log("Uploaded a file");
         //   console.log("didalam e = ", e);
-          e.ref.getDownloadURL().then(function (downloadURL) {
-            // console.log("File available at", downloadURL);
-            setState({
-                ...state,
-                imgUrl: downloadURL,
-            })
-          });
+            e.ref.getDownloadURL().then(function (downloadURL) {
+                // console.log("File available at", downloadURL);
+                setState({
+                    ...state,
+                    imgUrl: downloadURL,
+                })
+            });
           
         });
         
-      };
+    };
 
     return (
         <div>

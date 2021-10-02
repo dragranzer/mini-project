@@ -5,13 +5,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import {Link} from "react-router-dom";
 import { setUser } from '../store/KeranjangSlice';
 import useGetUser from "../hooks/useGetUser";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as FaIcons from "react-icons/fa";
 import useUpdateFullname from "../hooks/useUpdateFullname";
 import useUpdateUsername from "../hooks/useUpdateUsername";
 import useUpdateGender from "../hooks/useUpdateGender";
 import useUpdateAge from "../hooks/useUpdateAge";
 import useUpdatePassword from "../hooks/useUpdatePassword";
+import useUpdateImage from "../hooks/useUpdateImage";
+import { app } from "../base";
 
 function Profile() {
     const name = useSelector((state) => state.keranjang.user);
@@ -19,71 +21,60 @@ function Profile() {
     const dispatch = useDispatch()
     console.log(id);
     console.log(name);
+    const [image, setImage] = useState("")
+    const [state, setState] = useState({
+        fullname: "",
+        username: "",
+        age: "",
+        password: "",
+        gender: "",
+        image: ""
+    })
     const { loading, error, user } = useGetUser(id);
     const { updateFullname, loadingUpdateFullname } = useUpdateFullname(id);
     const { updateUsername, loadingUpdateUsername } = useUpdateUsername(id);
     const { updateGender, loadingUpdateGender} = useUpdateGender(id);
     const { updateAge, loadingUpdateAge} = useUpdateAge(id);
     const { updatePassword, loadingUpdatePassword} = useUpdatePassword(id);
+    const { updateImage, loadingUpdateImage} = useUpdateImage(id);
+
+    useEffect(()=>{
+        setState({
+            ...user[0],
+        })
+    }, [user])
     
     console.log(user)
-
+    console.log(state)
 
     const [editFullname, setEditFullname] = useState(false)
     const [editUsername, setEditUsername] = useState(false)
     const [editGender, setEditGender] = useState(false)
     const [editAge, setEditAge] = useState(false)
     const [editPassword, setEditPassword] = useState(false)
+    const [editImgUrl, setEditImgUrl] = useState(false)
 
-    const [newFullname, setNewFullname] = useState("")
-    const [newUsername, setNewUsername] = useState("")
-    const [newGender, setNewGender] = useState("")
-    const [newAge, setNewAge] = useState("")
-    const [newPassword, setNewPassword] = useState("")
+    if (loading || loadingUpdateFullname 
+        || loadingUpdateUsername || loadingUpdateGender 
+        || loadingUpdateAge || loadingUpdatePassword){
+        return <h3>Loading...</h3>;
+    }
+    // console.log(state)
 
-    
-    // console.log("afloading", loading)
-    // console.log("afloadingUpdateUsername", loadingUpdateUsername)
-    // console.log("afloadingUpdateFullname", loadingUpdateFullname)
     if (error){
         console.log("error ",error)
         return null
     }
 
-    const changeFullname = (e) => {
-        setNewFullname(
-          e.target.value
-        )
-        console.log(newFullname)
-    }
-    const changeUsername = (e) => {
-        setNewUsername(
-          e.target.value
-        )
-        console.log(newUsername)
-    }
+    const handleChange = e =>{
+        const name = e.target.name;
+        const value = e.target.value;
 
-    const changeGender = (e) => {
-        setNewGender(
-          e.target.value
-        )
-        console.log(newGender)
+        setState({
+            ...state,
+            [name]:value
+        })
     }
-
-    const changeAge = (e) => {
-        setNewAge(
-          e.target.value
-        )
-        console.log(newAge)
-    }
-    const changePassword = (e) => {
-        setNewPassword(
-          e.target.value
-        )
-        console.log(newPassword)
-    }
-
-
     const BukaInputFullname = () => {
         setEditFullname(true)
     }
@@ -123,31 +114,41 @@ function Profile() {
         handleUpdatePassword()
         setEditPassword(false)
     }
+    const TutupInputImgUrl = (e) =>{
+        handleUpdateImage()
+        setEditImgUrl(false)
+    }
+    const BukaInputImgUrl = e =>{
+        setEditImgUrl(true)
+    }
 
     const handleUpdateFullname = () => {
         updateFullname({variables:{
-            fullname: newFullname,
+            fullname: state.fullname,
             id: id
         }})
-       
-        // console.log(newData[0].username)
-        // console.log(newFullname)
     }
 
     const handleUpdateUsername = () => {
-        dispatch(setUser(newUsername));
+        dispatch(setUser(state.username));
         // console.log(newData[0].username)
         updateUsername({variables:{
-            newUsername: newUsername,
+            newUsername: state.username,
             id: id
         }})
     }
 
     const handleUpdateGender = () => {
         // console.log(newData[0].username)
-        console.log(newGender)
         updateGender({variables:{
-            gender: newGender,
+            gender: state.gender,
+            id: id
+        }})
+    }
+
+    const handleUpdateImage = () => {
+        updateImage({variables:{
+            image: state.image,
             id: id
         }})
     }
@@ -160,18 +161,16 @@ function Profile() {
 
     const handleUpdateAge = () => {
         // console.log(newData[0].username)
-        console.log(newAge)
         updateAge({variables:{
-            age: newAge,
+            age: state.age,
             id: id
         }})
     }
 
     const handleUpdatePassword = () => {
         // console.log(newData[0].username)
-        console.log(newPassword)
         updatePassword({variables:{
-            password: newPassword,
+            password: state.password,
             id: id
         }})
     }
@@ -181,6 +180,28 @@ function Profile() {
         || loadingUpdateAge || loadingUpdatePassword){
         return <h3>Loading...</h3>;
     }
+    const onChangeImg = (e) => {
+        const file = e.target.files[0];
+        // console.log(app)
+        const storageRef = app.storage().ref();
+        const fileRef = storageRef.child(file.name);
+        // console.log("file = ", file);
+        // console.log("storageRef = ", storageRef);
+        // console.log("fileRef = ", fileRef);
+        fileRef.put(file).then((e) => {
+        //   console.log("Uploaded a file");
+        //   console.log("didalam e = ", e);
+            e.ref.getDownloadURL().then(function (downloadURL) {
+                // console.log("File available at", downloadURL);
+                setState({
+                    ...state,
+                    image: downloadURL,
+                })
+            });
+          
+        });
+        
+    };
 
     return (
         <div>
@@ -188,7 +209,23 @@ function Profile() {
              <div className={styles.body}>
                 <div className="row">
                     <div className="col-5">
-
+                        {
+                            editImgUrl ?
+                                <div className={styles.upload}>
+                                    <input type="file" name="image" onChange={onChangeImg}/>
+                                    <br />
+                                    <div className={styles.buy} onClick={TutupInputImgUrl}>
+                                        Save
+                                    </div>
+                                </div>
+                            :
+                                <div>
+                                    <img className={styles.ItemImg} src={state.image} alt="" />
+                                    <div className={styles.buy} onClick={BukaInputImgUrl}>
+                                        Edit Image
+                                    </div>
+                                </div>
+                        }   
                     </div>
                     <div className="col-7">
                         <div className={styles.boxProfile}>
@@ -199,8 +236,8 @@ function Profile() {
                                 Fullname:
                                 {editFullname ? 
                                     <div>
-                                        <input type="text" value={newFullname} name="newFullname" onChange={changeFullname}/>
-                                        <FaIcons.FaSave onClick={TutupInputFullname}/>
+                                        <input type="text" value={state.fullname} name="fullname" onChange={handleChange} className={styles.input}/>
+                                        <span><FaIcons.FaSave onClick={TutupInputFullname}/></span>
                                     </div>
                                 :
                                     <div>
@@ -213,8 +250,8 @@ function Profile() {
                                 Username:
                                 {editUsername ? 
                                     <div>
-                                        <input type="text" value={newUsername} name="newUsername" onChange={changeUsername}/>
-                                        <FaIcons.FaSave onClick={TutupInputUsername}/>
+                                        <input type="text" value={state.username} name="username" onChange={handleChange} className={styles.input}/>
+                                        <span><FaIcons.FaSave onClick={TutupInputUsername}/></span>
                                     </div>
                                 :
                                     <div>
@@ -228,8 +265,8 @@ function Profile() {
                                 Gender:
                                 {editGender ? 
                                     <div>
-                                        <input type="text" value={newGender} name="newGender" onChange={changeGender}/>
-                                        <FaIcons.FaSave onClick={TutupInputGender}/>
+                                        <input type="text" value={state.gender} name="gender" onChange={handleChange} className={styles.input}/>
+                                        <span><FaIcons.FaSave onClick={TutupInputGender}/></span>
                                     </div>
                                 :
                                     <div>
@@ -243,8 +280,8 @@ function Profile() {
                                 Age:
                                 {editAge ? 
                                     <div>
-                                        <input type="text" value={newAge} name="newAge" onChange={changeAge}/>
-                                        <FaIcons.FaSave onClick={TutupInputAge}/>
+                                        <input type="text" value={state.age} name="age" onChange={handleChange} className={styles.input}/>
+                                        <span><FaIcons.FaSave onClick={TutupInputAge}/></span>
                                     </div>
                                 :
                                     <div>
@@ -258,8 +295,8 @@ function Profile() {
                                 Password: 
                                 {editPassword ? 
                                     <div>
-                                        <input type="text" value={newPassword} name="newPassword" onChange={changePassword}/>
-                                        <FaIcons.FaSave onClick={TutupInputPassword}/>
+                                        <input type="text" value={state.password} name="password" onChange={handleChange} className={styles.input}/>
+                                        <span><FaIcons.FaSave onClick={TutupInputPassword}/></span>
                                     </div>
                                 :
                                     <div>

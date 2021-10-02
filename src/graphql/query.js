@@ -9,6 +9,7 @@ query MyQuery($id: Int!) {
       password
       username
       id
+      image
     }
   }
   

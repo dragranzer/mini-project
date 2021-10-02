@@ -40,6 +40,21 @@ mutation MyMutation2($id: Int!, $fullname: String!) {
   }
 `
 
+export const UpdateImage = gql `
+mutation MyMutation2($id: Int!, $image: String!) {
+    update_user(where: {id: {_eq: $id}}, _set: {image: $image}) {
+      returning {
+        age
+        fullname
+        gender
+        id
+        password
+        username
+      }
+    }
+  }
+`
+
 export const UpdateUsername = gql `
 mutation MyMutation2($id: Int!, $newUsername: String!) {
     update_user(where: {id: {_eq: $id}}, _set: {username: $newUsername}) {
@@ -104,6 +119,22 @@ mutation MyMutation2($id: Int!, $password: String!) {
 export const DeleteFish = gql `
 mutation MyMutation($id: Int!) {
   delete_fishes(where: {id: {_eq: $id}}) {
+    returning {
+      category
+      description
+      harga
+      id
+      imgUrl
+      name
+      stock
+    }
+  }
+}
+`
+
+export const EditFish = gql `
+mutation MyMutation2($id: Int!, $category: String!, $description: String!, $harga: Int!, $imgUrl: String!, $name: String!, $stock: Int!) {
+  update_fishes(where: {id: {_eq: $id}}, _set: {category: $category, description: $description, harga: $harga, imgUrl: $imgUrl, name: $name, stock: $stock}) {
     returning {
       category
       description
