@@ -1,0 +1,32 @@
+.body{
+    height: 700px;
+    width: 100%;
+    background-image: url('../img/96622.jpg');
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding-top: 70px;
+}
+
+.box{
+    width: 1168px;
+    height: 80%;
+    background: linear-gradient(111.42deg, #B1B1B1 17.4%, rgba(255, 255, 255, 0.5) 90.6%);
+    backdrop-filter: blur(25px);
+    border-radius: 20px;
+    margin: auto;
+}
+
+.title{
+    font-family: Rochester;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 62px;
+    text-align: center;
+}
+
+.table{
+    color: #FFFFFF;
+    border-collapse: collapse;
+    margin: auto;
+    border: 1px solid black;
+}

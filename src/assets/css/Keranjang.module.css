@@ -36,3 +36,21 @@
     color: #FFFFFF;
     text-align: center;
 }
+
+.buy{
+    width: 96px;
+    height: 31px;
+    background: #29264A;
+    border-radius: 20px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+    padding-top: 5px;
+    margin-left: 19px;
+    margin: auto;
+}
+
+.buy:hover{
+    background: #5e55a8;
+}

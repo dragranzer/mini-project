@@ -4,7 +4,7 @@ import styles from '../assets/css/Login.module.css'
 import NavBLogin from '../components/NavBLogin'
 import { useState, useEffect } from "react"
 import { useDispatch } from 'react-redux';
-import { setUser, setID } from '../store/KeranjangSlice';
+import { setUser, setID, setFullname } from '../store/KeranjangSlice';
 import useLazyGetUser from "../hooks/useLazyGetUser";
 
 
@@ -28,6 +28,7 @@ function Login() {
                 history.push("/home");
                 dispatch(setID(user[0].id))
                 dispatch(setUser(state));
+                dispatch(setFullname(user[0].fullname))
             }else{
                 setErrMsg(true);
             }

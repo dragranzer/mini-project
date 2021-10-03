@@ -27,11 +27,14 @@ const ListFish = ({category, description, harga, id, imgUrl, stock, name}) => {
             <div className={styles.title}>
                 {name}
             </div>
-            <div className={styles.title}>
+            <div className={styles.ket}>
                 Harga: Rp.{harga}
             </div>
-            <div className={styles.title}>
-                Stock: Rp{stock}
+            <div className={styles.ket}>
+                Stock: {stock}
+            </div>
+            <div className={styles.ket}>
+                Category: {category}
             </div>
             <div className={styles.detail} onClick={detailClick}>
                 Detail

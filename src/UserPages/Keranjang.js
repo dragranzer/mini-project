@@ -4,8 +4,10 @@ import NavALogin from '../components/NavALogin';
 import { useSelector, useDispatch } from 'react-redux';
 import ListKeranjang from '../components/ListKeranjang';
 import { hapusKeranjang } from '../store/KeranjangSlice';
+import {useHistory} from "react-router-dom";
 
 function Keranjang() {
+    let history = useHistory();
     const barang = useSelector((state) => state.keranjang.barang);
     const dispatch = useDispatch();
     console.log(barang)
@@ -14,6 +16,10 @@ function Keranjang() {
         jumlahBarang = jumlahBarang + item.jumlah;
     })
     console.log(jumlahBarang)
+    const checkoutClick = e =>{
+        console.log("click")
+        history.push("/checkout")
+    }
     return (
         <div>
             <NavALogin />
@@ -44,6 +50,9 @@ function Keranjang() {
                     </table>
                     <div className={styles.jumlahBarang}>
                         Jumlah Barang: {jumlahBarang}
+                    </div>
+                    <div className={styles.buy} onClick={checkoutClick}>
+                        Checkout
                     </div>
                 </div>
 

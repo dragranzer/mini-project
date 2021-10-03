@@ -4,11 +4,12 @@ import styles from '../assets/css/HomeAdmin.module.css';
 import useGetAllFish from "../hooks/useGetAllFish";
 import ListFishAdmin from "../components/ListFishAdmin";
 import useDeleteFish from "../hooks/useDeleteFish";
+import { useSelector, useDispatch } from 'react-redux';
 
 function Home() {
     const { loading, error, fishes } = useGetAllFish();
     const { deleteFish, loadingDeleteFish } = useDeleteFish();
-
+    const category = useSelector((state) => state.keranjang.category);
     if(loading){
         return <h1>Getting Fish...</h1>;
     }
@@ -25,12 +26,17 @@ function Home() {
         }})
     }
     console.log(fishes);
+    const filtered = fishes.filter((item) => {
+        console.log(item.category)
+        return item.category.includes(category)
+    })
+    console.log(filtered)
     return (
         <div>
             <NavbarAdmin />
             <div className={styles.body}>
             {
-                fishes.map(({category, description, harga, id, imgUrl, stock, name}) => (
+                filtered.map(({category, description, harga, id, imgUrl, stock, name}) => (
                     <ListFishAdmin
                         key={id}
                         category={category}

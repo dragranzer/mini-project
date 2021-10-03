@@ -5,6 +5,8 @@ import { useState } from 'react';
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { SidebarData } from "./SidebarData";
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategory } from '../store/KeranjangSlice';
 
 function NavALogin() {
 
@@ -12,7 +14,11 @@ function NavALogin() {
     const showSidebar = () => {
         setSidebar(!sidebar)
     };
+    const dispatch = useDispatch()
 
+    const handleClick = (category) => {
+        dispatch(setCategory(category))
+    }
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light px-5 shadow-sm">
@@ -58,10 +64,10 @@ function NavALogin() {
                     </li>
                     {SidebarData.map((item, index) => {
                         return (
-                            <li key={index} className={styles.navText}>
-                                <Link to="#">
+                            <li key={index} className={styles.navText} onClick={()=>handleClick(item.category)}>
+                                <div >
                                     <span>{item.title}</span>
-                                </Link>
+                                </div>
                             </li>
                         )
                     })}
