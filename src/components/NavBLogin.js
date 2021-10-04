@@ -21,7 +21,7 @@ function NavBLogin() {
     return (
         
         <div className={styles.tes}>
-            <Link className={styles.content} to="/about-us">
+            <Link className={styles.content} to="/about-us-login">
                 <p>About Us</p>
             </Link>
         </div>

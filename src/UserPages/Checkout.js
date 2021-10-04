@@ -6,6 +6,8 @@ import ListKeranjangCheckout from '../components/ListKeranjangCheckout';
 import { useState,useEffect } from 'react';
 import Axios from 'axios';
 import useInsertLaporan from "../hooks/useInsertLaporan";
+import useGetFishbyId from "../hooks/useGetFishbyId";
+import useUpdateStockbyID from "../hooks/useUpdateStockbyID";
 import { kosongkanKeranjang } from '../store/KeranjangSlice';
 import {useHistory} from "react-router-dom";
 import Select, { OnChangeValue, StylesConfig } from 'react-select';
@@ -15,9 +17,22 @@ function ReviewPembelian() {
     const fullname = useSelector((state) => state.keranjang.fullname);
     const barang = useSelector((state) => state.keranjang.barang);
     const dispatch = useDispatch();
-    console.log(fullname);
+    console.log(barang);
     
     const { insertLaporan, loadingInsertLaporan } = useInsertLaporan();
+    const { fishInKeranjang, loading, error, getData_qry } = useGetFishbyId();
+    const { updateStockUpdateStockbyID, loadingUpdate } = useUpdateStockbyID();
+
+    if(loading){
+        <h1>Getting data</h1>
+    }
+
+    if(loadingUpdate){
+        <h1>Updating Database...</h1>
+    }
+    // console.log(fishesInKeranjang)
+
+    const [fishesInKeranjang, setFish] = useState([])
 
     const [provinces, setProvinces] = useState([])
     const [province, setProvince] = useState({
@@ -48,8 +63,7 @@ function ReviewPembelian() {
         waktu: "",
         harga: ""
     })
-
-    
+    console.log(fishesInKeranjang);
 
     const URL = "http://dev.farizdotid.com/api/daerahindonesia/provinsi"
     useEffect(() =>  {
@@ -119,6 +133,19 @@ function ReviewPembelian() {
             if(loadingInsertLaporan){
                 return <h1>Update Database...</h1>
             }
+            barang.map((item) => {
+                console.log("didalam mapping",item)
+                updateStockUpdateStockbyID({
+                    variables:{
+                        id: item.id,
+                        stock: item.stock - item.jumlah
+                    }
+                })
+            })
+            if(loadingUpdate){
+                <h1>Updating Database...</h1>
+            }
+
             setLaporan({
                 name: "",
                 alamat: "",
@@ -129,7 +156,8 @@ function ReviewPembelian() {
             dispatch(kosongkanKeranjang())
             history.push("/success");
         }else{
-            console.log("masuk else")
+            console.log("masuk else");
+            
         }  
     },[laporan]);
 
@@ -195,8 +223,10 @@ function ReviewPembelian() {
             tanggal: date,
             waktu: time           
         })
+        
+        // console.log("keranjang ikan",fishesInKeranjang)
     }
-    console.log(laporan)
+    // console.log("keranjang ikan",fishInKeranjang)
 
     return (
         <div>

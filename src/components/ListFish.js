@@ -19,7 +19,7 @@ const ListFish = ({category, description, harga, id, imgUrl, stock, name}) => {
         history.push("/detail-fish");
     }
     const buyClick = (e) => {
-        dispatch(tambahKeranjang({id,name,harga}));
+        dispatch(tambahKeranjang({id,name,harga,stock}));
     }
     return (
         <div className={styles.Item}>

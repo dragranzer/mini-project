@@ -19,8 +19,8 @@ function Profile() {
     const name = useSelector((state) => state.keranjang.user);
     const id = useSelector((state) => state.keranjang.id);
     const dispatch = useDispatch()
-    console.log(id);
-    console.log(name);
+    // console.log(id);
+    // console.log(name);
     const [image, setImage] = useState("")
     const [state, setState] = useState({
         fullname: "",
@@ -44,8 +44,8 @@ function Profile() {
         })
     }, [user])
     
-    console.log(user)
-    console.log(state)
+    // console.log(user)
+    // console.log(state)
 
     const [editFullname, setEditFullname] = useState(false)
     const [editUsername, setEditUsername] = useState(false)
@@ -147,8 +147,10 @@ function Profile() {
     }
 
     const handleUpdateImage = () => {
+        // console.log(id)
+        // console.log(image)
         updateImage({variables:{
-            image: state.image,
+            image: image,
             id: id
         }})
     }
@@ -192,17 +194,21 @@ function Profile() {
         //   console.log("Uploaded a file");
         //   console.log("didalam e = ", e);
             e.ref.getDownloadURL().then(function (downloadURL) {
-                // console.log("File available at", downloadURL);
-                setState({
-                    ...state,
-                    image: downloadURL,
-                })
+                console.log("File available at", downloadURL);
+                // setState({
+                //     ...state,
+                //     [image]: downloadURL,
+                // })
+                setImage(downloadURL)
+                console.log(image)
+                console.log(state)
             });
           
         });
         
     };
-
+    // console.log(image)
+    // console.log(state)
     return (
         <div>
              <NavALogin />

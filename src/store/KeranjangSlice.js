@@ -53,6 +53,7 @@ export const KeranjangSlice = createSlice ({
                 // console.log("ganemu")
                 state.listIdinKeranjang = [...state.listIdinKeranjang, action.payload.id]
                 // console.log(state.listIdinKeranjang)
+                console.log(action.payload)
                 const newData = {
                     ...action.payload,
                     jumlah: 1,

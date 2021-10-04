@@ -162,3 +162,19 @@ mutation MyMutation($nama_pembeli: String!, $alamat: String!, $tanggal: String!,
   }
 }
 `
+
+export const UpdateStockbyID = gql `
+mutation MyMutation3($id: Int!, $stock: Int! ){
+  update_fishes(where: {id: {_eq: $id}}, _set: {stock: $stock}) {
+    returning {
+      category
+      description
+      harga
+      id
+      imgUrl
+      name
+      stock
+    }
+  }
+}
+`

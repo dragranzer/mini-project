@@ -40,11 +40,14 @@ function NavbarAdmin() {
                         <ul className="navbar-nav me-auto "></ul>
                         
                         <ul className="navbar-nav">
+                            <li className="nav-item px-2">
+                            <Link className="nav-link" aria-current="page" to="/report">Report</Link>
+                            </li>
                             <li className="nav-item px-2 ">
                             <Link className="nav-link my-active" aria-current="page" to="/home-admin">Home</Link>
                             </li>
                             <li className="nav-item px-2 ">
-                            <Link className="nav-link" aria-current="page" to="/about-us">About Us</Link>
+                            <Link className="nav-link" aria-current="page" to="/about-us-admin">About Us</Link>
                             </li>
                             <li className="nav-item px-2">
                             <Link className="nav-link" aria-current="page" to="/input">Input Data</Link>
@@ -52,6 +55,7 @@ function NavbarAdmin() {
                             <li className="nav-item px-2">
                             <Link className="nav-link" aria-current="page" to="/">Log Out</Link>
                             </li>
+                            
                         </ul>
                     </div>
                 </div>
