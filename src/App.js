@@ -14,6 +14,7 @@ import DetailFish from './UserPages/DetailFish';
 import Keranjang from './UserPages/Keranjang';
 import EditFish from './AdminPages/EditFish';
 import Checkout from './UserPages/Checkout';
+import Success from './UserPages/Success';
 
 import {store, persistor} from "./store/store";
 
@@ -33,6 +34,7 @@ function App() {
             <Route exact path="/detail-fish" render={() => <DetailFish />}/>
             <Route exact path="/keranjang" render={() => <Keranjang />}/>
             <Route exact path="/checkout" render={() => <Checkout />}/>
+            <Route exact path="/success" render={() => <Success />}/>
             <Route exact path="/log-admin" render={() => <LoginAdmin />}/>
             <Route exact path="/home-admin" render={() => <HomeAdmin />}/>
             <Route exact path="/input" render={() => <InputAdmin />}/>

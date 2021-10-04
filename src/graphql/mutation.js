@@ -147,3 +147,18 @@ mutation MyMutation2($id: Int!, $category: String!, $description: String!, $harg
   }
 }
 `
+
+export const InsertLaporan = gql `
+mutation MyMutation($nama_pembeli: String!, $alamat: String!, $tanggal: String!, $total_harga: Int!, $waktu: String!) {
+  insert_laporan(objects: {nama_pembeli: $nama_pembeli, alamat: $alamat, tanggal: $tanggal, total_harga: $total_harga, waktu: $waktu}) {
+    returning {
+      waktu
+      total_harga
+      tanggal
+      nama_pembeli
+      id
+      alamat
+    }
+  }
+}
+`

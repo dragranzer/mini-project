@@ -88,9 +88,14 @@ export const KeranjangSlice = createSlice ({
         setCategory: (state, action) => {
             console.log(action.payload);
             state.category = action.payload;
+        },
+        kosongkanKeranjang: (state, action) => {
+            console.log("masuk sini")
+            state.barang = initialValue;
+            state.listIdinKeranjang = idFish;
         }
     }
 })
 
-export const {setUser, setID, setFish, tambahKeranjang, hapusKeranjang, setFishEdit, setFullname, setCategory} = KeranjangSlice.actions;
+export const {setUser, setID, setFish, tambahKeranjang, hapusKeranjang, setFishEdit, setFullname, setCategory, kosongkanKeranjang} = KeranjangSlice.actions;
 export default KeranjangSlice.reducer;
