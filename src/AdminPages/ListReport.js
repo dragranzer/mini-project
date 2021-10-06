@@ -16,14 +16,13 @@ function ListReport() {
             <div className={styles.body}>
                 <div className={styles.content}>
                     <div className={styles.title}>Sell Report</div>
-                <table cellPadding="10px" cellSpacing="0" className={styles.table}>
+                    <table cellPadding="10px" cellSpacing="0" className={styles.table}>
                         <thead bgcolor="#4F698F">
                             <td>Nama Pembeli</td>
                             <td>Alamat</td>
                             <td>Tanggal</td>
                             <td>Waktu</td>
                             <td>Total Harga</td>
-                            
                         </thead>
                         <tbody>
                         {laporans.map((item)=> (    

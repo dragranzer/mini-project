@@ -16,7 +16,8 @@ function NavALogin() {
     };
     const dispatch = useDispatch();
     const isiKeranjang = useSelector((state) => state.keranjang.isiKeranjang);
-
+    const name = useSelector((state) => state.keranjang.user);
+    console.log(name)
     const handleClick = (category) => {
         dispatch(setCategory(category))
     }
@@ -53,7 +54,7 @@ function NavALogin() {
                             <Link className="nav-link" aria-current="page" to="/keranjang">Keranjang</Link>
                             </li>
                             <li className="nav-item px-2">
-                            <Link className="nav-link" aria-current="page" to="/profile">Profile</Link>
+                            <Link className="nav-link" aria-current="page" to="/profile">Halo,{name}</Link>
                             </li>
                         </ul>
                     </div>

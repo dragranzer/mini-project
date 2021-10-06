@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { useDispatch } from 'react-redux';
 import { setUser, setID, setFullname } from '../store/KeranjangSlice';
 import useLazyGetUser from "../hooks/useLazyGetUser";
+import swal from 'sweetalert';
 
 
 function Login() {
@@ -15,12 +16,15 @@ function Login() {
         password: "",
     })
     const [errMsg, setErrMsg] = useState(false)
+    const [errMsgName, setErrMsgName] = useState(false)
+    const [click, setClick] = useState(false)
     
     const { user, loading, error, getData_qry } = useLazyGetUser();
     useEffect(()=>{
         console.log("masuk useEffect ")
         if (user.length !== 0 ){
-            if(user[0].password === state.password){
+            setErrMsgName(false)
+            if(user[0].password == state.password){
                 setErrMsg(false);
                 console.log("masuk if ")
                 console.log(user[0].password)
@@ -31,9 +35,12 @@ function Login() {
                 dispatch(setFullname(user[0].fullname))
             }else{
                 setErrMsg(true);
+                console.log("pass gasama")
             }
         }else{
-            
+            if(click){
+                setErrMsgName(true)
+            }
             console.log("masuk else ")
         }
     }, [user])
@@ -60,13 +67,21 @@ function Login() {
 
     const handleSubmit = (e) => {
         console.log("click")
-        getData_qry({variables : {
-            username : state.nama
-        }})
-        console.log(loading)
-        dispatch(setUser(state.nama));
-        console.log(user)
-        setErrMsg(true);
+        setClick(true);
+        if(state.nama !== "" && state.password !== ""){
+            getData_qry({variables : {
+                username : state.nama
+            }})
+            console.log(loading)
+            dispatch(setUser(state.nama));
+            console.log(user)
+        }else{
+            swal({
+                title: "Error",
+                text: "Mohon Lengkapi Data",
+                icon: "error",
+            });
+        }
     }
     console.log("state.nama = ", user)
     
@@ -98,6 +113,7 @@ function Login() {
                     </div>
                     <div className={styles.errMsg}>
                         {errMsg ? "Username dan Password tidak cocok":""}
+                        {errMsgName? "Username Tidak ditemukan":""}
                     </div>
                     <div className={styles.signUp}>
                         <p>Belum punya akun? <Link to ="/register">Daftar</Link></p>

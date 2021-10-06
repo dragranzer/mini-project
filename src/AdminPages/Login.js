@@ -4,6 +4,7 @@ import styles from '../assets/css/Login.module.css';
 import NavBLogin from '../components/NavBLogin';
 import { useState, useEffect } from "react"
 import useGetAdminbyUname from '../hooks/useGetAdminbyUname';
+import swal from 'sweetalert';
 
 function Login() {
     let history = useHistory();
@@ -12,12 +13,15 @@ function Login() {
         password: "",
     })
     const [errMsg, setErrMsg] = useState(false)
+    const [errMsgName, setErrMsgName] = useState(false)
+    const [click, setClick] = useState(false)
     
     const { admin, loading, error, getData_qry } = useGetAdminbyUname();
 
     useEffect(()=>{
         console.log("masuk useEffect ")
         if (admin.length !== 0 ){
+            setErrMsgName(false)
             if(admin[0].password === state.password){
                 setErrMsg(false);
                 console.log("masuk if ")
@@ -28,7 +32,9 @@ function Login() {
                 setErrMsg(true);
             }
         }else{
-            
+            if(click){
+                setErrMsgName(true);
+            }
             console.log("masuk else ")
         }
     }, [admin])
@@ -52,10 +58,18 @@ function Login() {
 
     const handleSubmit = (e) => {
         console.log("click")
-        getData_qry({variables : {
-            username : state.nama
-        }})
-        setErrMsg(true);
+        setClick(true);
+        if(state.nama !== "" && state.password !== ""){
+            getData_qry({variables : {
+                username : state.nama
+            }})
+        }else{
+            swal({
+                title: "Error",
+                text: "Mohon Lengkapi Data",
+                icon: "error",
+            });
+        }
     }
 
     return (
@@ -65,7 +79,7 @@ function Login() {
                 <div className={styles.loginBox}>
                     <div className={styles.contentBox}>
                         <div className={styles.title}>
-                            Login
+                            Login Admin
                         </div>
                         <div className={styles.caption}>
                             Username:
@@ -74,13 +88,14 @@ function Login() {
                         <div className={styles.caption}>
                             Password:
                         </div>
-                        <input type="text" placeholder="      Password" value={state.password} name="password" onChange={onChange}/>
+                        <input type="password" placeholder="      Password" value={state.password} name="password" onChange={onChange}/>
                     </div>
                     <div className={styles.signin} onClick={handleSubmit}>
                         <p>Login</p>
                     </div>
                     <div className={styles.errMsg}>
-                        {errMsg ? "Username dan Password tidak cocok":""}
+                        {errMsg ? "Username dan Password tidak cocok\n":""}
+                        {errMsgName? "Username Tidak ditemukan":""}
                     </div>
                     <Link to="/">
                         <div className={styles.admin}>

@@ -16,7 +16,7 @@ const ListFish = ({category, description, harga, id, imgUrl, stock, name}) => {
             stock: stock,
             harga: harga
         }));
-        history.push("/detail-fish");
+        history.push("/detail-fish?id="+id);
     }
     const buyClick = (e) => {
         dispatch(tambahKeranjang({id,name,harga,stock}));

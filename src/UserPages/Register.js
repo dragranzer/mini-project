@@ -181,7 +181,7 @@ function Register() {
                                         <div className={styles.errMsg}>
                                             {errMsgGender}
                                         </div>
-                                        <div className={styles.caption}>
+                                        <div className={styles.caption} >
                                             Password:
                                         </div>
                                         <input type="text" placeholder="      Password" value={state.password} name="password" onChange={onChange}/>
@@ -205,7 +205,7 @@ function Register() {
                                         <div className={styles.errMsg}>
                                             {errMsgAge}
                                         </div>
-                                        <div className={styles.caption}>
+                                        <div className={styles.captionPassC}>
                                             Password Confirm:
                                         </div>
                                         <input type="text" placeholder="      Password Confirm" value={state.passConfirm} name="passConfirm" onChange={onChange}/>

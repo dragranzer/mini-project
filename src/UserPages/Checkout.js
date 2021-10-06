@@ -11,6 +11,7 @@ import useUpdateStockbyID from "../hooks/useUpdateStockbyID";
 import { kosongkanKeranjang } from '../store/KeranjangSlice';
 import {useHistory} from "react-router-dom";
 import Select, { OnChangeValue, StylesConfig } from 'react-select';
+import swal from 'sweetalert';
 
 function ReviewPembelian() {
     let history = useHistory();
@@ -65,62 +66,62 @@ function ReviewPembelian() {
     })
     console.log(fishesInKeranjang);
 
-    const URL = "http://dev.farizdotid.com/api/daerahindonesia/provinsi"
+    
     useEffect(() =>  {
-        const getArticles = async () => {
+        const URL = "http://dev.farizdotid.com/api/daerahindonesia/provinsi"
+        const getProvinces = async () => {
             const res = await Axios.get(URL)
             setProvinces(res.data.provinsi)
-            // console.log(res.data.provinsi)
         }
 
-        getArticles();
-        // console.log("kosong")        
+        getProvinces();       
     },[]);
 
     useEffect(() =>  {
-        if(province.id !== ""){
-            const URLKab = "https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi="+province.id
-            // console.group(URLKab)
-            const getArticles = async () => {
-                const res = await Axios.get(URLKab)
+        if(province && province.id !== ""){
+            const URLCity = "https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi="+province.id
+            const getCities = async () => {
+                const res = await Axios.get(URLCity)
                 setCities(res.data.kota_kabupaten)
-                // console.log(res.data.kota_kabupaten)
             }
     
-            getArticles();
+            getCities();
+        }else{
+            setCities([])
         }  
     },[province]);
 
     useEffect(() =>  {
-        if(city.id !== ""){
+        if(city && city.id !== ""){
             const URLKec = "https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota="+city.id
-            // console.group(URLKec)
-            const getArticles = async () => {
+            const getKecamatans = async () => {
                 const res = await Axios.get(URLKec)
                 setKecamatans(res.data.kecamatan)
-                console.log(res.data.kecamatan)
             }
     
-            getArticles();
+            getKecamatans();
+        }else{
+            setKecamatans([])
         }  
     },[city]);
 
     useEffect(() =>  {
-        if(kecamatan.id !== ""){
+        if(kecamatan && kecamatan.id !== ""){
             const URLKel = "https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan="+kecamatan.id
             // console.group(URLKec)
-            const getArticles = async () => {
+            const getKelurahans = async () => {
                 const res = await Axios.get(URLKel)
                 setKelurahans(res.data.kelurahan)
-                console.log(res.data.kelurahan)
             }
     
-            getArticles();
+            getKelurahans();
+        }else{
+            setKelurahans([])
         }  
     },[kecamatan]);
 
     useEffect(() =>  {
-        if(laporan.alamat !== "    " && laporan.alamat !== ""){
+        if(laporan.alamat !== ""){
             console.log("masuk if")
             console.log(laporan.harga)
             insertLaporan({variables :{
@@ -213,20 +214,24 @@ function ReviewPembelian() {
         let minute = (today.getMinutes()>9 ? today.getMinutes() : "0"+today.getMinutes());
         let second = (today.getSeconds()>9 ? today.getSeconds() : "0"+today.getSeconds());
         let time = hour + ":" + minute + ":" + second;
-        let dateTime = date+' '+time;
 
-        console.log(dateTime)
-        setLaporan({
-            name: fullname,
-            alamat: detailAlamat + " " + kelurahan.nama + " " + kecamatan.nama + " " + city.nama + " " + province.nama,
-            harga: total,
-            tanggal: date,
-            waktu: time           
-        })
-        
-        // console.log("keranjang ikan",fishesInKeranjang)
+        if(fullname && province && city && kecamatan && kelurahan && detailAlamat){
+            setLaporan({
+                name: fullname,
+                alamat: detailAlamat + " " + kelurahan.nama + " " + kecamatan.nama 
+                        + " " + city.nama + " " + province.nama,
+                harga: total,
+                tanggal: date,
+                waktu: time           
+            })
+        }else{
+            swal({
+                title: "Error",
+                text: "Mohon Lengkapi Data",
+                icon: "error",
+            });
+        }
     }
-    // console.log("keranjang ikan",fishInKeranjang)
 
     return (
         <div>
@@ -266,6 +271,7 @@ function ReviewPembelian() {
                             Alamat:
                         </p>
                         <select name="province" onChange={handleChangeProvince}>
+                            <option value="">Select Province</option>
                             {
                                 provinces.map((item) => {
                                     // console.log(item);
@@ -274,6 +280,7 @@ function ReviewPembelian() {
                             }
                         </select>
                         <select name="city" onChange={handleChangeCity}>
+                            <option value="">Select City</option>
                             {
                                 cities.map((item) => {
                                     // console.log(item);
@@ -282,6 +289,7 @@ function ReviewPembelian() {
                             }
                         </select>
                         <select name="kecamatan" onChange={handleChangeKecamatan}>
+                            <option value="">Select Kecamatan</option>
                             {
                                 kecamatans.map((item) => {
                                     // console.log(item);
@@ -290,6 +298,7 @@ function ReviewPembelian() {
                             }
                         </select>
                         <select name="kelurahan" onChange={handleChangeKelurahan}>
+                            <option value="">Select Kelurahan</option>
                             {
                                 kelurahans.map((item) => {
                                     // console.log(item);

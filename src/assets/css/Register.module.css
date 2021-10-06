@@ -79,3 +79,13 @@ input{
 .radioLabel{
     margin-left: 0;
 }
+
+.captionPassC{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    margin-left: 15%;
+    margin-top: 32px;
+
+}

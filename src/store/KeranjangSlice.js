@@ -39,36 +39,22 @@ export const KeranjangSlice = createSlice ({
         },
         tambahKeranjang: (state, action) =>{
             state.isiKeranjang = state.isiKeranjang + 1
-            console.log(action.payload)
-            // state.listIdinKeranjang = [...state.listIdinKeranjang, action.payload.id]
-            // console.log(state.listIdinKeranjang)
             if(state.listIdinKeranjang.includes(action.payload.id)){
-                console.log("ketemu")
-                state.listIdinKeranjang = [...state.listIdinKeranjang]
-                // console.log(state.listIdinKeranjang)
                 const newData = state.barang.filter((item) => item.id === action.payload.id);
                 newData.map(item => {
                     item.jumlah = item.jumlah + 1
                 })
                 state.barang = [...state.barang]
-                console.log(state.barang)
             }else{
-                // console.log("ganemu")
                 state.listIdinKeranjang = [...state.listIdinKeranjang, action.payload.id]
-                // console.log(state.listIdinKeranjang)
-                console.log(action.payload)
                 const newData = {
                     ...action.payload,
                     jumlah: 1,
                 }
                 state.barang = [...state.barang, newData]
-                console.log(state.barang)
             }
         },
         hapusKeranjang: (state, action) => {
-            
-            // console.log("hapus id = ",action.payload);
-            // state.listIdinKeranjang = [...state.listIdinKeranjang, action.payload]
             state.barang = state.barang.filter(item => {
                 if(item.id === action.payload){
                     state.isiKeranjang = state.isiKeranjang - item.jumlah
@@ -76,12 +62,9 @@ export const KeranjangSlice = createSlice ({
                 
                 return item.id !== action.payload;
             })
-            // console.log("jalan");
             state.listIdinKeranjang = state.listIdinKeranjang.filter(item => {
-                // console.log(item)
                 return item !== action.payload;
             })
-            // console.log(state.listIdinKeranjang)
         },
         editJumlahPesanan: (state, action) => {
             console.log(action.payload);
@@ -99,7 +82,6 @@ export const KeranjangSlice = createSlice ({
             state.category = action.payload;
         },
         kosongkanKeranjang: (state, action) => {
-            console.log("masuk sini")
             state.barang = initialValue;
             state.listIdinKeranjang = idFish;
             state.isiKeranjang = 0
