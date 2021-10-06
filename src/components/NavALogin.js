@@ -14,7 +14,8 @@ function NavALogin() {
     const showSidebar = () => {
         setSidebar(!sidebar)
     };
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const isiKeranjang = useSelector((state) => state.keranjang.isiKeranjang);
 
     const handleClick = (category) => {
         dispatch(setCategory(category))
@@ -39,6 +40,9 @@ function NavALogin() {
                         <ul className="navbar-nav me-auto "></ul>
                         
                         <ul className="navbar-nav">
+                            <li className="nav-item px-2 ">
+                            <Link className="nav-link my-active" aria-current="page" to="#">Isi Keranjang = {isiKeranjang}</Link>
+                            </li>
                             <li className="nav-item px-2 ">
                             <Link className="nav-link my-active" aria-current="page" to="/home">Home</Link>
                             </li>

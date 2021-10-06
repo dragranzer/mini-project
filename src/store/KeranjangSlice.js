@@ -8,6 +8,7 @@ const fish = {}
 const fishEdit = {}
 const fullname = ""
 const category = ""
+const isiKeranjang = 0
 
 export const KeranjangSlice = createSlice ({
     name: "keranjang",
@@ -20,6 +21,7 @@ export const KeranjangSlice = createSlice ({
         fishEdit: fishEdit,
         fullname: fullname,
         category: category,
+        isiKeranjang: isiKeranjang
     },
     reducers:{
         setUser: (state, action) => {
@@ -36,6 +38,7 @@ export const KeranjangSlice = createSlice ({
             state.fish = action.payload;
         },
         tambahKeranjang: (state, action) =>{
+            state.isiKeranjang = state.isiKeranjang + 1
             console.log(action.payload)
             // state.listIdinKeranjang = [...state.listIdinKeranjang, action.payload.id]
             // console.log(state.listIdinKeranjang)
@@ -63,9 +66,14 @@ export const KeranjangSlice = createSlice ({
             }
         },
         hapusKeranjang: (state, action) => {
+            
             // console.log("hapus id = ",action.payload);
             // state.listIdinKeranjang = [...state.listIdinKeranjang, action.payload]
             state.barang = state.barang.filter(item => {
+                if(item.id === action.payload){
+                    state.isiKeranjang = state.isiKeranjang - item.jumlah
+                }
+                
                 return item.id !== action.payload;
             })
             // console.log("jalan");
@@ -94,6 +102,7 @@ export const KeranjangSlice = createSlice ({
             console.log("masuk sini")
             state.barang = initialValue;
             state.listIdinKeranjang = idFish;
+            state.isiKeranjang = 0
         }
     }
 })

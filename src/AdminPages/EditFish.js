@@ -184,7 +184,7 @@ function EditFish() {
                                 <div>
                                     {editDescription?
                                         <div>
-                                            <input type="text" value={state.description} name="description" onChange={onChange}/>
+                                            <textarea type="text" value={state.description} name="description" onChange={onChange} rows="4" cols="50"></textarea>
                                             <span><FaIcons.FaCheckCircle onClick={TutupInputDescription}/></span>
                                         </div>
                                     :

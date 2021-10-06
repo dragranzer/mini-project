@@ -49,7 +49,7 @@ function Register() {
                     password: newData.password,
                     username: newData.username,
                 }})
-                history.push("/home");
+                history.push("/");
             }else{
                 swal({
                     title: "Error",

@@ -238,66 +238,80 @@ function Profile() {
                             <div className={styles.title}>
                                 Profile
                             </div>
-                            <div className={styles.caption}>
-                                Fullname:
-                                {editFullname ? 
-                                    <div>
-                                        <input type="text" value={state.fullname} name="fullname" onChange={handleChange} className={styles.input}/>
-                                        <span><FaIcons.FaSave onClick={TutupInputFullname}/></span>
-                                    </div>
-                                :
-                                    <div>
-                                        {user[0].fullname} 
-                                        <span><FaIcons.FaEdit onClick={BukaInputFullname} /></span>
-                                    </div>
-                                }
-                            </div>
-                            <div className={styles.caption}>
-                                Username:
-                                {editUsername ? 
-                                    <div>
-                                        <input type="text" value={state.username} name="username" onChange={handleChange} className={styles.input}/>
-                                        <span><FaIcons.FaSave onClick={TutupInputUsername}/></span>
-                                    </div>
-                                :
-                                    <div>
-                                        {user[0].username}
-                                        <span><FaIcons.FaEdit onClick={BukaInputUsername}/></span>
-                                    </div>
-                                }
-                                 
-                            </div>
-                            <div className={styles.caption}>
-                                Gender:
-                                {editGender ? 
-                                    <div>
-                                        <input type="text" value={state.gender} name="gender" onChange={handleChange} className={styles.input}/>
-                                        <span><FaIcons.FaSave onClick={TutupInputGender}/></span>
-                                    </div>
-                                :
-                                    <div>
-                                        {user[0].gender}
-                                        <span><FaIcons.FaEdit onClick={BukaInputGender}/></span>
-                                    </div>
-                                }
-                                 
-                            </div>
-                            <div className={styles.caption}>
-                                Age:
-                                {editAge ? 
-                                    <div>
-                                        <input type="text" value={state.age} name="age" onChange={handleChange} className={styles.input}/>
-                                        <span><FaIcons.FaSave onClick={TutupInputAge}/></span>
-                                    </div>
-                                :
-                                    <div>
-                                        {user[0].age}
-                                        <span><FaIcons.FaEdit onClick={BukaInputAge}/></span>
-                                    </div>
-                                }
-                                 
-                            </div>
-                            <div className={styles.caption}>
+                            <table cellPadding="10px" cellSpacing="0" className={styles.table}>
+                                <thead>
+                                    <td></td>
+                                    <td></td>
+                                </thead>
+                                <tbody>
+                                    <tr className={styles.caption}>
+                                        <td> Fullname:</td>
+                                       
+                                        {editFullname ? 
+                                            <>
+                                                <td>
+                                                    <input type="text" value={state.fullname} name="fullname" onChange={handleChange} className={styles.input}/>
+                                                </td>
+                                                <td><FaIcons.FaSave onClick={TutupInputFullname}/></td>
+                                            </>
+                                        :
+                                            <>
+                                                <td>{user[0].fullname}</td>
+                                                <td><FaIcons.FaEdit onClick={BukaInputFullname} /></td>
+                                            </>
+                                        }
+                                    </tr>
+                                    <tr className={styles.caption}>
+                                        <td>Username:</td>
+                                        {editUsername ? 
+                                            <>
+                                                <td>
+                                                    <input type="text" value={state.username} name="username" onChange={handleChange} className={styles.input}/>
+                                                </td>
+                                                <td><FaIcons.FaSave onClick={TutupInputUsername}/></td>
+                                            </>
+                                        :
+                                            <>
+                                                <td>{user[0].username}</td>
+                                                <td><FaIcons.FaEdit onClick={BukaInputUsername}/></td>
+                                            </>
+                                        }
+                                    </tr>
+                                    <tr className={styles.caption}>
+                                        <td>Gender:</td>
+                                        {editGender ? 
+                                            <>
+                                                <td>
+                                                    <input type="text" value={state.gender} name="gender" onChange={handleChange} className={styles.input}/>
+                                                </td>
+                                                <td><FaIcons.FaSave onClick={TutupInputGender}/></td>
+                                            </>
+                                        :
+                                            <>
+                                                <td>{user[0].gender}</td>
+                                                <td><FaIcons.FaEdit onClick={BukaInputGender}/></td>
+                                            </>
+                                        }
+                                    </tr>
+                                    <tr className={styles.caption}>
+                                        <td> Age:</td>
+                                        {editAge ? 
+                                            <>
+                                                <td>
+                                                    <input type="text" value={state.age} name="age" onChange={handleChange} className={styles.input}/>
+                                                </td>
+                                                <td><FaIcons.FaSave onClick={TutupInputAge}/></td>
+                                            </>
+                                        :
+                                            <>
+                                                <td>{user[0].age}</td>
+                                                <td><FaIcons.FaEdit onClick={BukaInputAge}/></td>
+                                            </>
+                                        }
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div className={styles.password}>
                                 Password: 
                                 {editPassword ? 
                                     <div>
